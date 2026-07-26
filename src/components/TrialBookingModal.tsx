@@ -73,7 +73,7 @@ export const TrialBookingModal: React.FC<TrialBookingModalProps> = ({
         parentPhone,
         parentEmail,
         childName,
-        childAge,
+        childAge: parseInt(childAge) || 8,
         societyName,
         coachId: coach.id,
         coachName: coach.name,

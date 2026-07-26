@@ -230,7 +230,7 @@ export const BrowseCoachesSection: React.FC<BrowseCoachesProps> = ({
                           <h3 className="text-base font-extrabold text-slate-950 truncate">
                             {coach.name}
                           </h3>
-                          <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" title="Background Checked" />
+                          <span title="Background Checked"><CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" /></span>
                         </div>
                         <p className="text-xs text-teal-800 font-semibold truncate">{coach.title}</p>
                       </div>
