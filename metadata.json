@@ -1,0 +1,6 @@
+{
+  "name": "ATFIT - Hyperlocal Society Skill Coaching",
+  "description": "Verified skill-coaching marketplace for kids delivered inside residential societies across sports, fitness, mind games, and arts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
