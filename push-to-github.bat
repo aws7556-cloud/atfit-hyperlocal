@@ -29,18 +29,46 @@ echo [INFO] Staging files...
 git add .
 
 echo [INFO] Creating commit...
-git commit -m "Initialize project: configured port 3001, bound Vite HMR to HTTP server, and added startup scripts"
+git commit -m "Initialize project: configured port 3001, bound Vite HMR to HTTP server, and added startup scripts" 2>nul
 
 echo [INFO] Setting main branch...
 git branch -M main
 
-echo [INFO] Pushing to GitHub...
-echo [INFO] A browser window or credential prompt might open if you aren't authenticated.
+echo [INFO] Attempting standard push to main branch...
 git push -u origin main
 
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [ERROR] Git push failed. Please check your credentials and internet connection.
+    echo [WARNING] Standard push failed. The remote repository might contain files (like README or LICENSE) that you don't have locally.
+    echo.
+    echo Choose an option to resolve:
+    echo [1] Pull remote changes and merge (Recommended if remote has important files)
+    echo [2] Force push (Warning: This will overwrite anything currently on the remote)
+    echo [3] Exit
+    echo.
+    set /p choice="Enter your choice (1, 2, or 3): "
+
+    if "%choice%"=="1" (
+        echo.
+        echo [INFO] Attempting to pull and merge remote changes...
+        git pull origin main --allow-unrelated-histories --no-edit
+        echo.
+        echo [INFO] Retrying push...
+        git push -u origin main
+    ) else if "%choice%"=="2" (
+        echo.
+        echo [WARNING] Force pushing to main...
+        git push -f origin main
+    ) else (
+        echo.
+        echo Exiting...
+        exit /b
+    )
+)
+
+if %ERRORLEVEL% neq 0 (
+    echo.
+    echo [ERROR] Operation failed. Please check your credentials or resolve conflicts manually.
     pause
     exit /b
 )
