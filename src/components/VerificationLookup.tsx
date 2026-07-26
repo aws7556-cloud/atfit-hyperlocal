@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Search, QrCode, CheckCircle2, AlertTriangle, User, Calendar, MapPin, Award, ExternalLink, RefreshCw } from 'lucide-react';
+import { INITIAL_COACHES } from '../data';
 
 interface VerificationLookupProps {
   initialCode?: string;
@@ -15,12 +16,27 @@ export const VerificationLookup: React.FC<VerificationLookupProps> = ({ initialC
     if (!codeToSearch.trim()) return;
     setLoading(true);
     setSearched(true);
+    const code = codeToSearch.trim().toUpperCase();
     try {
       const res = await fetch(`/api/verify-coach?code=${encodeURIComponent(codeToSearch.trim())}`);
       const data = await res.json();
       setVerificationResult(data);
     } catch (err) {
-      setVerificationResult({ found: false, message: 'Server communication error.' });
+      // LocalStorage / static fallback
+      const savedCoaches = localStorage.getItem('atfit_coaches');
+      const coachesList = savedCoaches ? JSON.parse(savedCoaches) : INITIAL_COACHES;
+      const coach = coachesList.find(
+        (c: any) => c.id.toUpperCase() === code || c.badgeCode.toUpperCase() === code || c.name.toUpperCase().includes(code)
+      );
+      
+      if (coach) {
+        setVerificationResult({ found: true, coach });
+      } else {
+        setVerificationResult({
+          found: false,
+          message: `No verified ATFIT coach record matches ID: "${codeToSearch}". Please check the badge code printed on the physical ID card.`
+        });
+      }
     } finally {
       setLoading(false);
     }

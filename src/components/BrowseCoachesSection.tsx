@@ -20,7 +20,10 @@ export const BrowseCoachesSection: React.FC<BrowseCoachesProps> = ({
   setSelectedCategory,
   setActiveTab,
 }) => {
-  const [coaches] = useState<Coach[]>(INITIAL_COACHES);
+  const [coaches] = useState<Coach[]>(() => {
+    const saved = localStorage.getItem('atfit_coaches');
+    return saved ? JSON.parse(saved) : INITIAL_COACHES;
+  });
   const [searchQuery, setSearchQuery] = useState('');
   
   const [inspectCoach, setInspectCoach] = useState<Coach | null>(null);

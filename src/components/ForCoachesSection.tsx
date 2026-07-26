@@ -49,7 +49,31 @@ export const ForCoachesSection: React.FC = () => {
         setErrorMsg(data.error || 'Failed to submit application.');
       }
     } catch (err) {
-      setErrorMsg('Network error submitting application.');
+      // LocalStorage / static fallback
+      const mockApp = {
+        id: `APP-${Math.floor(100 + Math.random() * 900)}`,
+        fullName,
+        email,
+        phone,
+        category,
+        subCategory,
+        experienceYears,
+        preferredSocieties,
+        certificationsDetail,
+        status: 'Under Review',
+        appliedAt: new Date().toLocaleDateString(),
+      };
+
+      try {
+        const savedApps = localStorage.getItem('atfit_applications');
+        const appsList = savedApps ? JSON.parse(savedApps) : [];
+        appsList.push(mockApp);
+        localStorage.setItem('atfit_applications', JSON.stringify(appsList));
+      } catch (storageErr) {
+        console.error('Failed to save application to LocalStorage', storageErr);
+      }
+
+      setSubmittedApp(mockApp);
     } finally {
       setLoading(false);
     }

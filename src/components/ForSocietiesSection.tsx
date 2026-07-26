@@ -48,7 +48,31 @@ export const ForSocietiesSection: React.FC = () => {
         setErrorMsg(data.error || 'Failed to submit partnership request.');
       }
     } catch (err) {
-      setErrorMsg('Network error submitting request.');
+      // LocalStorage / static fallback
+      const mockInquiry = {
+        id: `INQ-${Math.floor(100 + Math.random() * 900)}`,
+        societyName,
+        representativeName,
+        roleInCommittee,
+        phone,
+        email,
+        flatCount,
+        locationArea,
+        notes,
+        status: 'Pending Contact',
+        submittedAt: new Date().toLocaleDateString(),
+      };
+
+      try {
+        const savedInquiries = localStorage.getItem('atfit_inquiries');
+        const inquiriesList = savedInquiries ? JSON.parse(savedInquiries) : [];
+        inquiriesList.push(mockInquiry);
+        localStorage.setItem('atfit_inquiries', JSON.stringify(inquiriesList));
+      } catch (storageErr) {
+        console.error('Failed to save inquiry to LocalStorage', storageErr);
+      }
+
+      setSubmittedInquiry(mockInquiry);
     } finally {
       setLoading(false);
     }

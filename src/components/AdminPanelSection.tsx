@@ -1,6 +1,155 @@
 import React, { useState, useEffect } from 'react';
 import { Coach, CoachStatus, NavTab } from '../types';
 import { ShieldCheck, ShieldAlert, CheckCircle2, XCircle, AlertTriangle, UserCheck, RefreshCw, QrCode } from 'lucide-react';
+import { INITIAL_COACHES } from '../data';
+
+// Helper to initialize/get admin data from LocalStorage if server fails
+const getLocalStorageAdminData = () => {
+  let coaches = localStorage.getItem('atfit_coaches');
+  if (!coaches) {
+    localStorage.setItem('atfit_coaches', JSON.stringify(INITIAL_COACHES));
+    coaches = JSON.stringify(INITIAL_COACHES);
+  }
+
+  let bookings = localStorage.getItem('atfit_bookings');
+  if (!bookings) {
+    const defaultBooking = [
+      {
+        id: "TB-9012",
+        parentName: "Siddharth Rao",
+        parentPhone: "+91 98765 43210",
+        parentEmail: "siddharth.rao@example.com",
+        childName: "Aarav Rao",
+        childAge: 8,
+        societyName: "Prestige Shantiniketan",
+        coachId: "ATFIT-101",
+        coachName: "Rohan Sharma",
+        activity: "Chess",
+        selectedSlot: "Mon & Wed 04:30 PM - 05:30 PM",
+        amountPaid: 99,
+        paymentStatus: "Completed",
+        bookingDate: new Date().toLocaleDateString(),
+      }
+    ];
+    localStorage.setItem('atfit_bookings', JSON.stringify(defaultBooking));
+    bookings = JSON.stringify(defaultBooking);
+  }
+
+  let applications = localStorage.getItem('atfit_applications');
+  if (!applications) {
+    const defaultApplications = [
+      {
+        id: "APP-501",
+        fullName: "Karan Malhotra",
+        email: "karan.skate@example.com",
+        phone: "+91 91234 56789",
+        category: "Fitness",
+        subCategory: "Skating & Balance",
+        experienceYears: 4,
+        preferredSocieties: "Palm Meadows, Adarsh Palm Retreat",
+        certificationsDetail: "State Level Roller Skating Champion & Certified Trainer",
+        status: "Under Review",
+        appliedAt: new Date().toLocaleDateString(),
+      }
+    ];
+    localStorage.setItem('atfit_applications', JSON.stringify(defaultApplications));
+    applications = JSON.stringify(defaultApplications);
+  }
+
+  let inquiries = localStorage.getItem('atfit_inquiries');
+  if (!inquiries) {
+    localStorage.setItem('atfit_inquiries', JSON.stringify([]));
+    inquiries = JSON.stringify([]);
+  }
+
+  const coachesList = JSON.parse(coaches);
+  const bookingsList = JSON.parse(bookings);
+  const applicationsList = JSON.parse(applications);
+  const inquiriesList = JSON.parse(inquiries);
+
+  const totalTrialBookings = bookingsList.length;
+  const revenueGenerated = bookingsList.reduce((sum: number, b: any) => sum + b.amountPaid, 0);
+
+  return {
+    success: true,
+    stats: {
+      totalCoaches: coachesList.length,
+      activeCoaches: coachesList.filter((c: any) => c.status === "Active").length,
+      totalTrialBookings,
+      revenueGenerated,
+      totalApplications: applicationsList.length,
+      pendingApplications: applicationsList.filter((a: any) => a.status === "Under Review").length,
+    },
+    coaches: coachesList,
+    bookings: bookingsList,
+    applications: applicationsList,
+    societyInquiries: inquiriesList,
+  };
+};
+
+const toggleCoachStatusInLocalStorage = (coachId: string, newStatus: CoachStatus) => {
+  const data = getLocalStorageAdminData();
+  const updatedCoaches = data.coaches.map((c: any) => {
+    if (c.id === coachId) {
+      return { ...c, status: newStatus };
+    }
+    return c;
+  });
+  localStorage.setItem('atfit_coaches', JSON.stringify(updatedCoaches));
+};
+
+const approveApplicationInLocalStorage = (appId: string) => {
+  const data = getLocalStorageAdminData();
+  const appRecord = data.applications.find((a: any) => a.id === appId);
+  if (!appRecord) return;
+
+  const updatedApps = data.applications.map((a: any) => {
+    if (a.id === appId) {
+      return { ...a, status: 'Approved' };
+    }
+    return a;
+  });
+  localStorage.setItem('atfit_applications', JSON.stringify(updatedApps));
+
+  // Add new coach
+  const newCoach = {
+    id: `ATFIT-${Math.floor(107 + Math.random() * 80)}`,
+    name: appRecord.fullName,
+    title: `${appRecord.subCategory} Specialist`,
+    category: appRecord.category,
+    subCategory: appRecord.subCategory,
+    rating: 4.8,
+    reviewsCount: 0,
+    experienceYears: appRecord.experienceYears,
+    verifiedSince: new Date().toLocaleDateString(),
+    status: 'Active',
+    avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    actionPhotos: [
+      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80"
+    ],
+    bio: `Newly verified ATFIT coach for ${appRecord.subCategory} with ${appRecord.experienceYears} years experience.`,
+    certifications: [appRecord.certificationsDetail, "Background Verification Complete"],
+    assignedSocieties: appRecord.preferredSocieties.split(",").map((s: string) => s.trim()),
+    availableSlots: [
+      {
+        id: `s-new`,
+        day: "Mon & Wed",
+        time: "05:00 PM - 06:00 PM",
+        society: appRecord.preferredSocieties.split(",")[0] || "Prestige Shantiniketan",
+        maxKids: 8,
+        bookedKids: 0,
+      },
+    ],
+    trialPrice: 99,
+    monthlyPriceStarter: 399,
+    monthlyPriceStandard: 699,
+    monthlyPricePremium: 999,
+    badgeCode: `ATFIT-${Math.floor(107 + Math.random() * 80)}`,
+  };
+
+  const updatedCoaches = [...data.coaches, newCoach];
+  localStorage.setItem('atfit_coaches', JSON.stringify(updatedCoaches));
+};
 
 interface AdminPanelSectionProps {
   setActiveTab: (tab: NavTab) => void;
@@ -18,7 +167,9 @@ export const AdminPanelSection: React.FC<AdminPanelSectionProps> = ({ setActiveT
       const data = await res.json();
       setAdminData(data);
     } catch (err) {
-      console.error('Failed to load admin data');
+      // LocalStorage / static fallback
+      const data = getLocalStorageAdminData();
+      setAdminData(data);
     } finally {
       setLoading(false);
     }
@@ -42,7 +193,10 @@ export const AdminPanelSection: React.FC<AdminPanelSectionProps> = ({ setActiveT
         fetchAdminOverview();
       }
     } catch (err) {
-      setStatusMsg('Error toggling coach status.');
+      // LocalStorage / static fallback
+      toggleCoachStatusInLocalStorage(coachId, newStatus);
+      setStatusMsg(`Coach ${coachId} status changed to ${newStatus} (Saved Locally). Public QR Verification page reflects this instantly!`);
+      fetchAdminOverview();
     }
   };
 
@@ -59,7 +213,10 @@ export const AdminPanelSection: React.FC<AdminPanelSectionProps> = ({ setActiveT
         fetchAdminOverview();
       }
     } catch (err) {
-      setStatusMsg('Error approving application.');
+      // LocalStorage / static fallback
+      approveApplicationInLocalStorage(appId);
+      setStatusMsg(`Application ${appId} approved! New active coach created with QR badge (Saved Locally).`);
+      fetchAdminOverview();
     }
   };
 
