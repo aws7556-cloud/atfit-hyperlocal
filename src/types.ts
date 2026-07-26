@@ -1,4 +1,4 @@
-export type CategoryType = 'Sports' | 'Fitness' | 'Mind Games' | 'Arts';
+export type CategoryType = 'Sports' | 'Dance' | 'Fitness' | 'Other';
 
 export type CoachStatus = 'Active' | 'Under Review' | 'Suspended';
 
@@ -99,4 +99,13 @@ export interface SocietyInquiry {
   locationArea: string;
   notes: string;
   createdAt: string;
+}
+
+export interface CurriculumItem {
+  id: string;
+  name: string;
+  category: CategoryType;
+  emoji: string;
+  description: string;
+  coachesAvailableCount: number;
 }

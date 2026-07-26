@@ -3,6 +3,7 @@ import { NavTab, CategoryType } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { HowItWorksSection } from './components/HowItWorksSection';
+import { CurriculumExplorer } from './components/CurriculumExplorer';
 import { BrowseCoachesSection } from './components/BrowseCoachesSection';
 import { VerificationLookup } from './components/VerificationLookup';
 import { PricingSection } from './components/PricingSection';
@@ -17,6 +18,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('home');
   const [selectedSociety, setSelectedSociety] = useState<string>('All');
   const [selectedCategory, setSelectedCategory] = useState<CategoryType | 'All'>('All');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleSelectCategoryFromHero = (category: CategoryType) => {
     setSelectedCategory(category);
@@ -57,12 +59,23 @@ export default function App() {
 
               <HowItWorksSection setActiveTab={setActiveTab} />
 
+              <CurriculumExplorer
+                onSelectClass={(className, category) => {
+                  setSelectedCategory(category);
+                  setSearchQuery(className);
+                  setActiveTab('browse-coaches');
+                }}
+                setActiveTab={setActiveTab}
+              />
+
               <div className="pt-4">
                 <BrowseCoachesSection
                   selectedSociety={selectedSociety}
                   setSelectedSociety={setSelectedSociety}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
                   setActiveTab={setActiveTab}
                 />
               </div>
@@ -99,6 +112,8 @@ export default function App() {
                 setSelectedSociety={setSelectedSociety}
                 selectedCategory={selectedCategory}
                 setSelectedCategory={setSelectedCategory}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
                 setActiveTab={setActiveTab}
               />
             </motion.div>

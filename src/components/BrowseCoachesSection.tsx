@@ -10,6 +10,8 @@ interface BrowseCoachesProps {
   setSelectedSociety: (soc: string) => void;
   selectedCategory: CategoryType | 'All';
   setSelectedCategory: (cat: CategoryType | 'All') => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
   setActiveTab: (tab: NavTab) => void;
 }
 
@@ -18,13 +20,14 @@ export const BrowseCoachesSection: React.FC<BrowseCoachesProps> = ({
   setSelectedSociety,
   selectedCategory,
   setSelectedCategory,
+  searchQuery,
+  setSearchQuery,
   setActiveTab,
 }) => {
   const [coaches] = useState<Coach[]>(() => {
     const saved = localStorage.getItem('atfit_coaches');
     return saved ? JSON.parse(saved) : INITIAL_COACHES;
   });
-  const [searchQuery, setSearchQuery] = useState('');
   
   const [inspectCoach, setInspectCoach] = useState<Coach | null>(null);
   const [bookingCoach, setBookingCoach] = useState<{ coach: Coach; slot: string } | null>(null);
@@ -51,7 +54,7 @@ export const BrowseCoachesSection: React.FC<BrowseCoachesProps> = ({
     return true;
   });
 
-  const categoriesList: (CategoryType | 'All')[] = ['All', 'Sports', 'Fitness', 'Mind Games', 'Arts'];
+  const categoriesList: (CategoryType | 'All')[] = ['All', 'Sports', 'Dance', 'Fitness', 'Other'];
 
   return (
     <section id="atfit-browse-coaches" className="py-12 bg-slate-50 min-h-screen">

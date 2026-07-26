@@ -43,8 +43,8 @@ async function startServer() {
       fullName: "Karan Malhotra",
       email: "karan.skate@example.com",
       phone: "+91 91234 56789",
-      category: "Fitness",
-      subCategory: "Skating & Balance",
+      category: "Sports",
+      subCategory: "Skating",
       experienceYears: 4,
       preferredSocieties: "Palm Meadows, Adarsh Palm Retreat",
       certificationsDetail: "State Level Roller Skating Champion & Certified Trainer",
@@ -434,9 +434,26 @@ async function startServer() {
     });
   }
 
-  httpServer.listen(PORT, "0.0.0.0", () => {
-    console.log(`ATFIT Server running on http://0.0.0.0:${PORT}`);
+  let currentPort = PORT;
+
+  const startListening = (port: number) => {
+    httpServer.listen(port, "0.0.0.0", () => {
+      console.log(`ATFIT Server running on http://localhost:${port}`);
+    });
+  };
+
+  httpServer.on("error", (err: any) => {
+    if (err.code === "EADDRINUSE") {
+      console.log(`Port ${currentPort} is already in use.`);
+      currentPort++;
+      console.log(`Trying to start server on port ${currentPort}...`);
+      startListening(currentPort);
+    } else {
+      console.error("Server listener encountered an error:", err);
+    }
   });
+
+  startListening(currentPort);
 }
 
 startServer().catch((err) => {

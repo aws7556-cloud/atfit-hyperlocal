@@ -231,12 +231,12 @@ export const ForCoachesSection: React.FC = () => {
                       <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value as CategoryType)}
-                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-teal-950 focus:bg-white focus:outline-teal-600"
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-teal-950 focus:bg-white focus:outline-teal-600 cursor-pointer"
                       >
-                        <option value="Sports">Sports</option>
-                        <option value="Fitness">Fitness</option>
-                        <option value="Mind Games">Mind Games</option>
-                        <option value="Arts">Arts</option>
+                        <option value="Sports">Sports Classes</option>
+                        <option value="Dance">Dance Classes</option>
+                        <option value="Fitness">Gymnastics & Fitness Classes</option>
+                        <option value="Other">Other Classes</option>
                       </select>
                     </div>
 

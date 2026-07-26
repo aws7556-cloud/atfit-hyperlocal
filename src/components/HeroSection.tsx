@@ -219,10 +219,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Award className="w-5 h-5 text-[#0B192C]" />
             </div>
             <h3 className="text-base font-serif font-bold text-[#0B192C] group-hover:text-[#C5A059] transition-colors">
-              Athletics / Sports
+              Sports Classes
             </h3>
             <span className="text-[10px] tracking-widest text-slate-400 font-semibold block uppercase">
-              124 PROFESSIONALS
+              15 Sport Skills
+            </span>
+          </div>
+
+          <div
+            onClick={() => { onSelectCategory('Dance'); setActiveTab('browse-coaches'); }}
+            className="bg-white p-6 rounded-2xl border border-[#E2D6C0] hover:border-[#C5A059] transition-all cursor-pointer space-y-3 group shadow-2xs hover:shadow-md"
+          >
+            <div className="w-12 h-12 bg-[#FBF9F5] rounded-full mx-auto flex items-center justify-center border border-[#EADFCB]">
+              <Sparkles className="w-5 h-5 text-[#0B192C]" />
+            </div>
+            <h3 className="text-base font-serif font-bold text-[#0B192C] group-hover:text-[#C5A059] transition-colors">
+              Dance Classes
+            </h3>
+            <span className="text-[10px] tracking-widest text-slate-400 font-semibold block uppercase">
+              11 Dance Styles
             </span>
           </div>
 
@@ -231,43 +246,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             className="bg-white p-6 rounded-2xl border border-[#E2D6C0] hover:border-[#C5A059] transition-all cursor-pointer space-y-3 group shadow-2xs hover:shadow-md"
           >
             <div className="w-12 h-12 bg-[#FBF9F5] rounded-full mx-auto flex items-center justify-center border border-[#EADFCB]">
-              <Sparkles className="w-5 h-5 text-[#0B192C]" />
-            </div>
-            <h3 className="text-base font-serif font-bold text-[#0B192C] group-hover:text-[#C5A059] transition-colors">
-              Yoga & Fitness
-            </h3>
-            <span className="text-[10px] tracking-widest text-slate-400 font-semibold block uppercase">
-              86 PROFESSIONALS
-            </span>
-          </div>
-
-          <div
-            onClick={() => { onSelectCategory('Arts'); setActiveTab('browse-coaches'); }}
-            className="bg-white p-6 rounded-2xl border border-[#E2D6C0] hover:border-[#C5A059] transition-all cursor-pointer space-y-3 group shadow-2xs hover:shadow-md"
-          >
-            <div className="w-12 h-12 bg-[#FBF9F5] rounded-full mx-auto flex items-center justify-center border border-[#EADFCB]">
               <Award className="w-5 h-5 text-[#0B192C]" />
             </div>
             <h3 className="text-base font-serif font-bold text-[#0B192C] group-hover:text-[#C5A059] transition-colors">
-              Fine Arts & Dance
+              Gymnastics & Fitness
             </h3>
             <span className="text-[10px] tracking-widest text-slate-400 font-semibold block uppercase">
-              42 PROFESSIONALS
+              11 Fit Disciplines
             </span>
           </div>
 
           <div
-            onClick={() => { onSelectCategory('Mind Games'); setActiveTab('browse-coaches'); }}
+            onClick={() => { onSelectCategory('Other'); setActiveTab('browse-coaches'); }}
             className="bg-white p-6 rounded-2xl border border-[#E2D6C0] hover:border-[#C5A059] transition-all cursor-pointer space-y-3 group shadow-2xs hover:shadow-md"
           >
             <div className="w-12 h-12 bg-[#FBF9F5] rounded-full mx-auto flex items-center justify-center border border-[#EADFCB]">
               <ShieldCheck className="w-5 h-5 text-[#0B192C]" />
             </div>
             <h3 className="text-base font-serif font-bold text-[#0B192C] group-hover:text-[#C5A059] transition-colors">
-              Chess & Logic
+              Other Creative Classes
             </h3>
             <span className="text-[10px] tracking-widest text-slate-400 font-semibold block uppercase">
-              38 PROFESSIONALS
+              15 Art & Logic Skills
             </span>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Coach, HousingSociety, CategoryType } from './types';
+import { Coach, HousingSociety, CategoryType, CurriculumItem } from './types';
 
 export const POPULAR_SOCIETIES: HousingSociety[] = [
   {
@@ -58,7 +58,7 @@ export const INITIAL_COACHES: Coach[] = [
     id: 'ATFIT-101',
     name: 'Rohan Sharma',
     title: 'FIDE Certified Chess Master & Youth Coach',
-    category: 'Mind Games',
+    category: 'Sports',
     subCategory: 'Chess',
     experienceYears: 7,
     rating: 4.92,
@@ -158,7 +158,7 @@ export const INITIAL_COACHES: Coach[] = [
     id: 'ATFIT-104',
     name: 'Ananya Roy',
     title: 'Fine Arts & Clay Sculpting Master',
-    category: 'Arts',
+    category: 'Other',
     subCategory: 'Drawing & Painting',
     experienceYears: 5,
     rating: 4.96,
@@ -191,8 +191,8 @@ export const INITIAL_COACHES: Coach[] = [
     id: 'ATFIT-105',
     name: 'Sensei Deepak Verma',
     title: 'Shotokan Karate 3rd Dan Black Belt',
-    category: 'Fitness',
-    subCategory: 'Martial Arts / Karate',
+    category: 'Sports',
+    subCategory: 'Martial Arts',
     experienceYears: 10,
     rating: 4.90,
     reviewsCount: 71,
@@ -224,8 +224,8 @@ export const INITIAL_COACHES: Coach[] = [
     id: 'ATFIT-106',
     name: 'Kavita Menon',
     title: 'Abacus & Mental Math Speed Trainer',
-    category: 'Mind Games',
-    subCategory: 'Mental Math / Abacus',
+    category: 'Other',
+    subCategory: 'Abacus & Mental Math',
     experienceYears: 6,
     rating: 4.89,
     reviewsCount: 31,
@@ -250,41 +250,137 @@ export const INITIAL_COACHES: Coach[] = [
     monthlyPriceStandard: 699,
     monthlyPricePremium: 999,
     badgeCode: 'ATFIT-106'
+  },
+  {
+    id: 'ATFIT-107',
+    name: 'Arjun Mehta',
+    title: 'BCCI Level 1 Certified Cricket Coach',
+    category: 'Sports',
+    subCategory: 'Cricket',
+    experienceYears: 9,
+    rating: 4.91,
+    reviewsCount: 53,
+    verifiedSince: 'Mar 2024',
+    status: 'Active',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    actionPhotos: [
+      'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80'
+    ],
+    bio: 'Dedicated cricket coach focusing on batting technique, spin/pace bowling nets, and tactical match play for residential society youth programs.',
+    certifications: [
+      'BCCI Level 1 Coaching Certificate',
+      'Former Ranji Trophy Squad Member',
+      'Background Checked #VER-9192'
+    ],
+    assignedSocieties: ['Prestige Shantiniketan', 'Brigade Metropolis', 'Sobha Royal Pavilion'],
+    availableSlots: [
+      { id: 's13', day: 'Tue & Thu', time: '04:00 PM - 05:30 PM', society: 'Prestige Shantiniketan', maxKids: 15, bookedKids: 11 },
+      { id: 's14', day: 'Saturday', time: '08:30 AM - 10:30 AM', society: 'Brigade Metropolis', maxKids: 15, bookedKids: 12 }
+    ],
+    trialPrice: 99,
+    monthlyPriceStarter: 399,
+    monthlyPriceStandard: 699,
+    monthlyPricePremium: 999,
+    badgeCode: 'ATFIT-107'
+  },
+  {
+    id: 'ATFIT-108',
+    name: 'Sarah Jenkins',
+    title: 'Royal Academy of Dance Certified Ballerina',
+    category: 'Dance',
+    subCategory: 'Ballet',
+    experienceYears: 7,
+    rating: 4.98,
+    reviewsCount: 41,
+    verifiedSince: 'Feb 2024',
+    status: 'Active',
+    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80',
+    actionPhotos: [
+      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80'
+    ],
+    bio: 'Passionate ballerina guiding kids through basic footwork, posture, flexibility, and lyrical routine choreography inside clubhouse multipurpose halls.',
+    certifications: [
+      'RAD Advanced Ballet Certificate',
+      'Childhood Dance Pedagogy Diploma',
+      'Police Clearance Verified'
+    ],
+    assignedSocieties: ['Palm Meadows', 'Adarsh Palm Retreat'],
+    availableSlots: [
+      { id: 's15', day: 'Mon & Wed', time: '05:00 PM - 06:15 PM', society: 'Palm Meadows', maxKids: 10, bookedKids: 6 },
+      { id: 's16', day: 'Friday', time: '04:30 PM - 06:00 PM', society: 'Adarsh Palm Retreat', maxKids: 10, bookedKids: 8 }
+    ],
+    trialPrice: 99,
+    monthlyPriceStarter: 399,
+    monthlyPriceStandard: 699,
+    monthlyPricePremium: 999,
+    badgeCode: 'ATFIT-108'
+  },
+  {
+    id: 'ATFIT-109',
+    name: 'Rohan Malhotra',
+    title: 'National Gymnastics Gold Medalist & Coach',
+    category: 'Fitness',
+    subCategory: 'Artistic Gymnastics',
+    experienceYears: 6,
+    rating: 4.93,
+    reviewsCount: 29,
+    verifiedSince: 'May 2024',
+    status: 'Active',
+    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    actionPhotos: [
+      'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80'
+    ],
+    bio: 'Specializes in fundamental gymnastics floor routines, tumbling, cartwheels, and agility training for children ages 4-12 using soft safety mats.',
+    certifications: [
+      'SGFI National Gymnastics Gold Medalist',
+      'Youth Agility & Strength Specialist',
+      'Verified Society Fitness Coach'
+    ],
+    assignedSocieties: ['Sobha Royal Pavilion', 'Prestige Shantiniketan'],
+    availableSlots: [
+      { id: 's17', day: 'Tue & Thu', time: '04:30 PM - 05:30 PM', society: 'Sobha Royal Pavilion', maxKids: 8, bookedKids: 5 },
+      { id: 's18', day: 'Saturday', time: '11:00 AM - 12:30 PM', society: 'Prestige Shantiniketan', maxKids: 10, bookedKids: 7 }
+    ],
+    trialPrice: 99,
+    monthlyPriceStarter: 399,
+    monthlyPriceStandard: 699,
+    monthlyPricePremium: 999,
+    badgeCode: 'ATFIT-109'
   }
 ];
 
 export const CATEGORY_TILES: { type: CategoryType; title: string; subtitle: string; iconName: string; bgGradient: string; count: number }[] = [
   {
     type: 'Sports',
-    title: 'Sports & Athletics',
-    subtitle: 'Swimming, Football, Badminton, Lawn Tennis',
+    title: 'Sports Classes',
+    subtitle: 'Cricket, Football, Basketball, Swimming, Chess',
     iconName: 'Trophy',
     bgGradient: 'from-emerald-50 to-teal-100/70 border-teal-200',
-    count: 24
-  },
-  {
-    type: 'Fitness',
-    title: 'Fitness & Martial Arts',
-    subtitle: 'Karate, Gymnastics, Skating, Yoga',
-    iconName: 'Activity',
-    bgGradient: 'from-amber-50 to-orange-100/70 border-amber-200',
-    count: 18
-  },
-  {
-    type: 'Mind Games',
-    title: 'Mind Games & Logic',
-    subtitle: 'Chess, Abacus, Vedic Maths, Rubik Cube',
-    iconName: 'Brain',
-    bgGradient: 'from-sky-50 to-indigo-100/70 border-indigo-200',
     count: 15
   },
   {
-    type: 'Arts',
-    title: 'Arts & Creative',
-    subtitle: 'Drawing, Clay Sculpting, Guitar, Classical Dance',
-    iconName: 'Palette',
+    type: 'Dance',
+    title: 'Dance Classes',
+    subtitle: 'Hip-Hop, Bollywood, Classical, Zumba, Ballet',
+    iconName: 'Music',
     bgGradient: 'from-rose-50 to-pink-100/70 border-rose-200',
-    count: 12
+    count: 11
+  },
+  {
+    type: 'Fitness',
+    title: 'Gymnastics & Fitness',
+    subtitle: 'Artistic Gymnastics, Acrobatics, Calisthenics',
+    iconName: 'Activity',
+    bgGradient: 'from-amber-50 to-orange-100/70 border-amber-200',
+    count: 11
+  },
+  {
+    type: 'Other',
+    title: 'Other Classes',
+    subtitle: 'Drawing, Music, Guitar, Coding, Drama, Languages',
+    iconName: 'Palette',
+    bgGradient: 'from-sky-50 to-indigo-100/70 border-indigo-200',
+    count: 14
   }
 ];
 
@@ -340,4 +436,66 @@ export const TESTIMONIALS_DATA = [
     quote: 'We started with the Rs. 99 trial on the society turf ground. Coach Vikram’s energy was infectious! We converted to the Standard monthly subscription immediately.',
     rating: 5
   }
+];
+
+export const CURRICULUM_DATA: CurriculumItem[] = [
+  // --- SPORTS CLASSES (15) ---
+  { id: 'curr-sp-1', category: 'Sports', name: 'Cricket', emoji: '🏏', description: 'Professional cricket coaching, nets practice, and match temperament.', coachesAvailableCount: 1 },
+  { id: 'curr-sp-2', category: 'Sports', name: 'Football / Soccer', emoji: '⚽', description: 'Agility, dribbling, and team dynamics on lawn/turf grounds.', coachesAvailableCount: 1 },
+  { id: 'curr-sp-3', category: 'Sports', name: 'Basketball', emoji: '🏀', description: 'Dribbling, shooting mechanics, and tactical team defense.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-4', category: 'Sports', name: 'Volleyball', emoji: '🏐', description: 'Service, smashing, and team synchronization drills.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-5', category: 'Sports', name: 'Badminton', emoji: '🏸', description: 'Reflex training, footwork, and racquet control on society courts.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-6', category: 'Sports', name: 'Tennis', emoji: '🎾', description: 'Groundstrokes, service, and baseline rallies.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-7', category: 'Sports', name: 'Table Tennis', emoji: '🏓', description: 'Hand-eye coordination, spin control, and quick reflex play.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-8', category: 'Sports', name: 'Swimming', emoji: '🏊', description: 'Water confidence, breathing, and stroke refinement.', coachesAvailableCount: 1 },
+  { id: 'curr-sp-9', category: 'Sports', name: 'Skating', emoji: '🛼', description: 'Balance, strides, and safety equipment drills on skating rinks.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-10', category: 'Sports', name: 'Martial Arts', emoji: '🥋', description: 'Shotokan Karate, discipline, and defense tactics.', coachesAvailableCount: 1 },
+  { id: 'curr-sp-11', category: 'Sports', name: 'Boxing', emoji: '🥊', description: 'Stamina, footwork, and basic punching/defense mechanics.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-12', category: 'Sports', name: 'Archery', emoji: '🏹', description: 'Focus, stance, and target accuracy training.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-13', category: 'Sports', name: 'Athletics', emoji: '🏃', description: 'Track running, jumping, and physical conditioning.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-14', category: 'Sports', name: 'Yoga', emoji: '🧘', description: 'Flexibility, mindfulness, and breathing exercises.', coachesAvailableCount: 0 },
+  { id: 'curr-sp-15', category: 'Sports', name: 'Chess', emoji: '♟️', description: 'Strategic tactics, openings, and cognitive chess play.', coachesAvailableCount: 1 },
+
+  // --- DANCE CLASSES (11) ---
+  { id: 'curr-dn-1', category: 'Dance', name: 'Hip-Hop', emoji: '👟', description: 'High energy, grooves, and street-dance choreography.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-2', category: 'Dance', name: 'Bollywood Dance', emoji: '🕺', description: 'Expressive, upbeat, and traditional movie dance routines.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-3', category: 'Dance', name: 'Classical Dance (Odissi, Bharatanatyam, Kathak)', emoji: '🩰', description: 'Precise footwork, mudras, and classical expressions.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-4', category: 'Dance', name: 'Contemporary Dance', emoji: '🎭', description: 'Fluid movement, self-expression, and lyrical flow.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-5', category: 'Dance', name: 'Jazz Dance', emoji: '🎶', description: 'Rhythmic footwork, turns, and theatrical styling.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-6', category: 'Dance', name: 'Ballet', emoji: '🩰', description: 'Poise, posture, and core strength alignment.', coachesAvailableCount: 1 },
+  { id: 'curr-dn-7', category: 'Dance', name: 'Freestyle Dance', emoji: '💫', description: 'Dynamic, improvisational, and energetic movement.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-8', category: 'Dance', name: 'Zumba', emoji: '💃', description: 'Cardio fitness, latin rhythms, and high-energy dance.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-9', category: 'Dance', name: 'Salsa', emoji: '🎵', description: 'Partner coordination, rhythm, and latin styling.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-10', category: 'Dance', name: 'Breakdance', emoji: '💥', description: 'Power moves, footwork, and street style freezes.', coachesAvailableCount: 0 },
+  { id: 'curr-dn-11', category: 'Dance', name: 'Folk Dance', emoji: '🌾', description: 'Traditional folk rhythms and festive community dances.', coachesAvailableCount: 0 },
+
+  // --- GYMNASTICS & FITNESS CLASSES (11) ---
+  { id: 'curr-ft-1', category: 'Fitness', name: 'Artistic Gymnastics', emoji: '🤸', description: 'Floor exercises, flexibility, and coordination.', coachesAvailableCount: 1 },
+  { id: 'curr-ft-2', category: 'Fitness', name: 'Rhythmic Gymnastics', emoji: '🎗️', description: 'Graceful routine work with hoops, ribbons, and balls.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-3', category: 'Fitness', name: 'Acrobatics', emoji: '🎪', description: 'Balance, tumbling, and partner routines.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-4', category: 'Fitness', name: 'Tumbling', emoji: '🌀', description: 'Flips, somersaults, and spatial awareness.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-5', category: 'Fitness', name: 'Parkour', emoji: '🏃‍♂️', description: 'Obstacle navigation, jumping, and landing techniques.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-6', category: 'Fitness', name: 'Calisthenics', emoji: '💪', description: 'Bodyweight strength, pull-ups, and core control.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-7', category: 'Fitness', name: 'General Fitness', emoji: '🔋', description: 'Overall stamina, endurance, and youth agility.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-8', category: 'Fitness', name: 'Strength Training', emoji: '🏋️', description: 'Resistance training and muscular conditioning.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-9', category: 'Fitness', name: 'Aerobics', emoji: '⚡', description: 'Rhythmic cardiovascular exercises and coordination.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-10', category: 'Fitness', name: 'Pilates', emoji: '🧘‍♀️', description: 'Core stabilization, posture, and muscle balancing.', coachesAvailableCount: 0 },
+  { id: 'curr-ft-11', category: 'Fitness', name: 'Stretching & Flexibility', emoji: '🤸‍♂️', description: 'Muscle elongation, recovery, and injury prevention.', coachesAvailableCount: 0 },
+
+  // --- OTHER CLASSES (15) ---
+  { id: 'curr-ot-1', category: 'Other', name: 'Drawing & Painting', emoji: '🎨', description: 'Watercolors, acrylics, and sketching basics.', coachesAvailableCount: 1 },
+  { id: 'curr-ot-2', category: 'Other', name: 'Art & Craft', emoji: '✂️', description: 'Clay sculpting, origami, and DIY creative crafting.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-3', category: 'Other', name: 'Music', emoji: '🎵', description: 'Rhythm theory, music appreciation, and reading sheet music.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-4', category: 'Other', name: 'Singing', emoji: '🎤', description: 'Vocal warmups, pitch control, and choir singing.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-5', category: 'Other', name: 'Guitar', emoji: '🎸', description: 'Chord progressions, fingerpicking, and rhythmic strumming.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-6', category: 'Other', name: 'Piano / Keyboard', emoji: '🎹', description: 'Finger placement, scales, and classical melodies.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-7', category: 'Other', name: 'Coding & Robotics', emoji: '💻', description: 'Visual programming, logical blocks, and basic robotics.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-8', category: 'Other', name: 'Public Speaking', emoji: '🗣️', description: 'Confidence building, debate skills, and stage presence.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-9', category: 'Other', name: 'Drama & Acting', emoji: '🎭', description: 'Character play, expression, and storytelling.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-10', category: 'Other', name: 'Photography', emoji: '📷', description: 'Camera mechanics, composition, and visual storytelling.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-11', category: 'Other', name: 'Cooking', emoji: '🍳', description: 'Fireless culinary skills and basic recipe creation.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-12', category: 'Other', name: 'Foreign Languages', emoji: '🌐', description: 'French, Spanish, or German conversations for beginners.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-13', category: 'Other', name: 'Meditation', emoji: '🧠', description: 'Mindfulness, focus, and emotional regulation.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-14', category: 'Other', name: 'Personality Development', emoji: '🌟', description: 'Social etiquette, communication, and confidence.', coachesAvailableCount: 0 },
+  { id: 'curr-ot-15', category: 'Other', name: 'Abacus & Mental Math', emoji: '🧮', description: 'Vedic mathematics and mental math speed training.', coachesAvailableCount: 1 }
 ];
