@@ -11,6 +11,7 @@ import { ForCoachesSection } from './components/ForCoachesSection';
 import { ForSocietiesSection } from './components/ForSocietiesSection';
 import { DashboardSection } from './components/DashboardSection';
 import { AdminPanelSection } from './components/AdminPanelSection';
+import { UnifiedSportsSection } from './components/UnifiedSportsSection';
 import { Footer } from './components/Footer';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -81,6 +82,7 @@ export default function App() {
               </div>
 
               <PricingSection setActiveTab={setActiveTab} />
+              <UnifiedSportsSection />
             </motion.div>
           )}
 

@@ -1,5 +1,5 @@
 @echo off
-title Push to GitHub
+title Push to GitHub - ATFIT Hyperlocal
 echo ===================================================
 echo   Pushing ATFIT Hyperlocal to GitHub
 echo ===================================================
@@ -29,21 +29,30 @@ echo [INFO] Staging files...
 git add .
 
 echo [INFO] Creating commit...
-git commit -m "Initialize project: configured port 3001, bound Vite HMR to HTTP server, and added startup scripts" 2>nul
+git commit -m "Update ATFIT Hyperlocal codebase and sports features"
 
 echo [INFO] Setting main branch...
 git branch -M main
 
-echo [INFO] Force pushing to main branch...
-git push -f -u origin main
+echo [INFO] Pushing to main branch...
+git push -u origin main
 
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [ERROR] Git push failed. Please check your credentials or internet connection.
+    echo [INFO] Standard push failed, attempting force push...
+    git push -f -u origin main
+)
+
+if %ERRORLEVEL% neq 0 (
+    echo.
+    echo [ERROR] Git push failed. Please check your GitHub authentication / credentials.
     pause
     exit /b
 )
 
 echo.
+echo ===================================================
 echo [SUCCESS] Code pushed successfully to GitHub!
+echo Repository: https://github.com/aws7556-cloud/atfit-hyperlocal.git
+echo ===================================================
 pause
